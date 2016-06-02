@@ -1,4 +1,0 @@
-include ':app'
-
-include ":library-core"
-project(":library-core").projectDir = new File("../library-core/library")
