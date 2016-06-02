@@ -3,6 +3,9 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 group='com.github.bmutinda'
 
+configurations {
+    compile.exclude module: 'demo'
+}
 
 android {
     compileSdkVersion 23
