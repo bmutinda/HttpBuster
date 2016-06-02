@@ -5,6 +5,7 @@ A very simple way to do http requests in **Android** using **okHttp**
 
 
 ### Installation 
+---
 
 In your app `build.gradle` under repositories, include `jitpack.io` like below
 ```java
