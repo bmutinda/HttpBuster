@@ -1,7 +1,9 @@
 # HttpBuster
 
 A very simple way to do http requests in **Android** using **okHttp**
+***
 
+#### Latest Version: [![Release](https://jitpack.io/v/bmutinda/httpbuster.svg)](https://jitpack.io/#bmutinda/HttpBuster)
 
 
 ### Installation 
@@ -23,4 +25,3 @@ Example:
 ```java
   compile 'com.github.bmutinda:httpbuster:1.0'
 ```
-
