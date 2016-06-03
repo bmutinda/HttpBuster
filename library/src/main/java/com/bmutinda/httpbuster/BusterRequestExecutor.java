@@ -27,7 +27,7 @@ public class BusterRequestExecutor {
 
     public void run( final ApiCallback apiCallback ){
         if ( httpBuster == null || request == null ){
-            apiCallback.done(null, new Exception("HttpBuster or request is empty."));
+            apiCallback.done(null, null, new Exception("HttpBuster or request is empty."));
             return;
         }
 
@@ -82,7 +82,7 @@ public class BusterRequestExecutor {
         }
 
         if ( httpRequest == null ){
-            apiCallback.done(null, new Exception("Un-known request method supplied."));
+            apiCallback.done(null, null, new Exception("Un-known request method supplied.") );
             return;
         }
 
@@ -91,7 +91,7 @@ public class BusterRequestExecutor {
         httpBuster.getHttpClient().newCall( httpRequest ).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                apiCallback.done( null, e );
+                apiCallback.done( null, null, e );
             }
 
             @Override
@@ -103,7 +103,7 @@ public class BusterRequestExecutor {
                 } catch (JSONException e) {
                     exception = e ;
                 }
-                apiCallback.done(json, exception);
+                apiCallback.done(response, json, exception);
             }
         });
     }
