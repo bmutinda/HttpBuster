@@ -34,6 +34,10 @@ public class BusterResponse {
         }
     }
 
+    public Response getResponse(){
+        return response;
+    }
+
     public ResponseBody getBody(){
         return body;
     }
