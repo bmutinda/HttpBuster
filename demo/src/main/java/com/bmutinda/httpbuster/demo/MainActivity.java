@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.bmutinda.httpbuster.ApiCallback;
-import com.squareup.okhttp.Response;
+import com.bmutinda.httpbuster.BusterResponse;
 
 import org.json.JSONObject;
 
@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
         // Get Request without any params added
         HttpBusterApplication.getHttpBuster().makeGetRequest("jokes/random", null, new ApiCallback() {
             @Override
-            public void done(Response response, JSONObject jsonObject, Exception exception) {
+            public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
                 Log.e(TAG, "GET without params done");
                 if ( jsonObject !=null){
                     Log.e(TAG, jsonObject.toString());
                 }
+
+                Log.e(TAG, "Response WITHOUT =" +response.getString() );
             }
         });
 
@@ -42,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
         map.put("lastName", "Boniface");
         HttpBusterApplication.getHttpBuster().makeGetRequest("jokes/random/10", map, new ApiCallback() {
             @Override
-            public void done(Response response, JSONObject jsonObject, Exception exception) {
+            public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
                 Log.e(TAG, "GET with params done");
                 if ( jsonObject !=null){
                     Log.e(TAG, jsonObject.toString());
                 }
+
+                Log.e(TAG, "Response WITH =" +response.getString() );
             }
         });
     }

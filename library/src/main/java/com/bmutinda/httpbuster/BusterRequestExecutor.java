@@ -98,12 +98,13 @@ public class BusterRequestExecutor {
             public void onResponse(Response response) throws IOException {
                 JSONObject json = new JSONObject();
                 Exception exception = null;
+                BusterResponse busterResponse = BusterResponse.build(response);
                 try {
-                    json = new JSONObject( response.body().string() );
+                    json = new JSONObject( busterResponse.getString() );
                 } catch (JSONException e) {
                     exception = e ;
                 }
-                apiCallback.done(response, json, exception);
+                apiCallback.done(busterResponse, json, exception);
             }
         });
     }
