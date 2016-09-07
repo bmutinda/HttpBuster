@@ -75,7 +75,7 @@ public class BusterRequestExecutor {
 
             MultipartRequest req = (MultipartRequest) request;
             for (RequestFile requestFile: req.getRequestFiles()){
-                multipartBuilder.addFormDataPart(requestFile.getFileKey(), requestFile.getFileName(), RequestBody.create(requestFile.getMediaType(), new File(requestFile.getFileName())));
+                multipartBuilder.addFormDataPart(requestFile.getFileKey(), requestFile.getFileName(), RequestBody.create(requestFile.getMediaType(), new File(requestFile.getFilePath())));
             }
             Request.Builder builder = prepareRequest(finalUrl);
             httpRequest = builder.post( multipartBuilder.build() ).build();
