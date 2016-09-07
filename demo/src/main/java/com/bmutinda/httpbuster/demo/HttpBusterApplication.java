@@ -18,7 +18,7 @@ public class HttpBusterApplication extends Application {
 
     private void initializeApi(){
         Api api = new Api();
-        api.setEndpoint("https://api.icndb.com/");
+        api.setEndpoint("http://10.0.2.2/apps/httpbuster/api/v1/");
         httpBuster = HttpBuster.withApi(api).build();
     }
 
