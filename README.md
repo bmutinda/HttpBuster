@@ -12,7 +12,7 @@ api.setEndpoint("https://example.com/api/");
 HttpBuster httpBuster = HttpBuster.withApi(api).build();
 ```
 Thats it. Now you are ready to make http requests to your api endpoint.
-#### Make Get request
+#### Make GET request
 a.) Without any request parameters 
 ```java
 httpBuster.makeGetRequest("jokes/random", null, new ApiCallback() {
@@ -39,6 +39,26 @@ httpBuster.makeGetRequest("jokes/random", map, new ApiCallback() {
 #### NB:
 1. **The same applies for `POST`, `PUT`, `DELETE` requests**
 2. We recommend using a single **HttpBuster** instance for the entire application- You can do this by intializing your **HttpBuster** instance via the Application class
+
+#### Make FILE UPLOAD request
+```java
+
+// Add files to be upload 
+List<RequestFile> files = new ArrayList<>();
+String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath()+"/no_picture.png";
+files.add( new RequestFile("photo", file, MediaType.parse("image/PNG")) );
+
+// add optional payload (this is optional)
+HashMap<String, Object> map = new HashMap<>();
+map.put("name", "Mutinda Boniface");
+
+httpBuster.makeMultipartRequest("photo-upload/", map, files, new ApiCallback() {
+    @Override
+    public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
+        Log.e(TAG,  "POST MULTIPART - Response =" +(response!=null? response.getString() :"Not reachable" ));
+    }
+});
+```
 
 Have a look at the demo app for a complete app using the Library [Demo app](https://github.com/bmutinda/HttpBuster/tree/master/demo/src/main/java/com/bmutinda/httpbuster/demo)
 
