@@ -99,10 +99,13 @@ public class BusterRequestExecutor {
                 JSONObject json = new JSONObject();
                 Exception exception = null;
                 BusterResponse busterResponse = BusterResponse.build(response);
-                try {
-                    json = new JSONObject( busterResponse.getString() );
-                } catch (JSONException e) {
-                    exception = e ;
+
+                if( busterResponse.getString() !=null ){
+                    try {
+                        json = new JSONObject( busterResponse.getString() );
+                    } catch (JSONException e) {
+                        exception = e ;
+                    }
                 }
                 apiCallback.done(busterResponse, json, exception);
             }
