@@ -21,12 +21,18 @@ public class HttpBuster {
     private OkHttpClient okHttpClient;
     private Api api;
     private Configuration configuration;
+    public static boolean debug = false;
 
     private HttpBuster(Api api){
         this.api = api;
     }
 
-    public HttpBuster withConfiguration( Configuration configuration ){
+    public HttpBuster enableLogs( boolean enable ){
+        debug = enable;
+        return this;
+    }
+
+    public HttpBuster withConfiguration(Configuration configuration ){
         this.configuration = configuration;
         return this;
     }
@@ -120,6 +126,9 @@ public class HttpBuster {
     }
 
     public static void log( String message ){
+        if ( ! debug ){
+            return;
+        }
         Log.e("HttpBuster", message);
     }
 }
