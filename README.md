@@ -17,7 +17,7 @@ a.) Without any request parameters
 ```java
 httpBuster.makeGetRequest("jokes/random", null, new ApiCallback() {
     @Override
-    public void done(JSONObject jsonObject, Exception exception) {
+    public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
         Log.e(TAG, "GET without params done");
     }
 });
@@ -30,7 +30,7 @@ map.put("firstName", "Mutinda");
 map.put("lastName", "Boniface");
 httpBuster.makeGetRequest("jokes/random", map, new ApiCallback() {
     @Override
-    public void done(JSONObject jsonObject, Exception exception) {
+    public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
         Log.e(TAG, "GET with params done");
     }
 });
