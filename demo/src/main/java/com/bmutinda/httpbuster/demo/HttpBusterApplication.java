@@ -18,7 +18,7 @@ public class HttpBusterApplication extends Application {
 
     private void initializeApi(){
         Api api = new Api();
-        api.setEndpoint("http://10.0.2.2/apps/httpbuster/api/v1/");
+        api.setEndpoint("http://f87d9e68.ngrok.io/apps/httpbuster/api/v1/");
         httpBuster = HttpBuster.withApi(api)
                 .enableLogs(true)
                 .build();

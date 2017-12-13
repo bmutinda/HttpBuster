@@ -1,5 +1,6 @@
 package com.bmutinda.httpbuster.demo;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import com.bmutinda.httpbuster.ApiCallback;
 import com.bmutinda.httpbuster.BusterResponse;
 import com.bmutinda.httpbuster.files.RequestFile;
 import com.squareup.okhttp.MediaType;
+import com.vistrav.ask.Ask;
+import com.vistrav.ask.annotations.AskGrantedAll;
 
 import org.json.JSONObject;
 
@@ -25,6 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Ask.on(this)
+                .forPermissions(Manifest.permission.READ_EXTERNAL_STORAGE
+                        , Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withRationales("READ",
+                        "READ")
+                .go();
+    }
+
+    @AskGrantedAll
+    public void grantedAll(){
         runGet();
         runPost();
         runPostUpload();
@@ -67,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void runPostUpload(){
-        String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath()+"/no_picture.png";
+        String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath()+"/images.jpeg";
 
-        RequestFile requestFile = new RequestFile("photo", file, MediaType.parse("image/PNG"));
+        RequestFile requestFile = new RequestFile("photo", file, MediaType.parse("image/jpeg"));
         List<RequestFile> files = new ArrayList<>();
         files.add( requestFile );
 
@@ -79,7 +92,11 @@ public class MainActivity extends AppCompatActivity {
         HttpBusterApplication.getHttpBuster().makeMultipartRequest("photo-upload/", map, files, new ApiCallback() {
             @Override
             public void done(BusterResponse response, JSONObject jsonObject, Exception exception) {
-                exception.printStackTrace();
+
+                if ( exception !=null ){
+                    exception.printStackTrace();
+                    log( "Excepti===" +exception.getLocalizedMessage());
+                }
 
                 log(  "POST MULTIPART - Response =" +(response!=null? response.getString() :"Not reachable" ));
             }
