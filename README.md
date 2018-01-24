@@ -85,3 +85,10 @@ Example:
 ```java
   compile 'com.github.bmutinda:httpbuster:1.0'
 ```
+
+## Wanna Support?
+If `HttpBuster` helped you save time for your project delivery, you can buy coffee for me.
+
+Cheers
+
+[Buy Me Coffee](https://buymeacoff.ee/o5SnzKO)
